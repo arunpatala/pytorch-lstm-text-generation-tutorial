@@ -9,7 +9,9 @@ class Dataset(torch.utils.data.Dataset):
     ):
         self.args = args
         self.words = self.load_words()
+        print("text length", len(self.words))
         self.uniq_words = self.get_uniq_words()
+        print("num of words", len(self.uniq_words))
 
         self.index_to_word = {index: word for index, word in enumerate(self.uniq_words)}
         self.word_to_index = {word: index for index, word in enumerate(self.uniq_words)}
@@ -17,7 +19,7 @@ class Dataset(torch.utils.data.Dataset):
         self.words_indexes = [self.word_to_index[w] for w in self.words]
 
     def load_words(self):
-        train_df = pd.read_csv('dataset.csv')
+        train_df = pd.read_csv('dataset3.csv')
         text = train_df['Joke'].str.cat(sep=' ')
         return text.split(' ')
 
