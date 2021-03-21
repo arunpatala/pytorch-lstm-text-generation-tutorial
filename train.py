@@ -5,6 +5,7 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from model import Model
 from dataset import Dataset
+from tqdm import tqdm 
 
 def train(dataset, model, args):
     model.train()
