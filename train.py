@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from model import Model
 from dataset import Dataset
 from tqdm import tqdm 
-prompt = 'start civ_magyars building_lumbercamp building_mill research_loom building_lumbercamp'
+prompt = 'START civ_magyars building_lumbercamp building_mill research_loom building_lumbercamp'
 def train(dataset, model, args):
     model.train()
 
@@ -38,7 +38,7 @@ def train(dataset, model, args):
         print({ 'epoch': epoch, 'batch': batch, 'loss': loss.item() })
         print(predict(dataset, model, text=prompt))
 
-def predict(dataset, model, text, next_words=100):
+def predict(dataset, model, text, next_words=200):
     words = text.split(' ')
     model.eval()
 
