@@ -33,7 +33,8 @@ def train(dataset, model, args):
             loss.backward()
             optimizer.step()
 
-            print({ 'epoch': epoch, 'batch': batch, 'loss': loss.item() })
+        print({ 'epoch': epoch, 'batch': batch, 'loss': loss.item() })
+        print(predict(dataset, model, text=''))
 
 def predict(dataset, model, text, next_words=100):
     words = text.split(' ')
@@ -55,11 +56,11 @@ def predict(dataset, model, text, next_words=100):
 parser = argparse.ArgumentParser()
 parser.add_argument('--max-epochs', type=int, default=10)
 parser.add_argument('--batch-size', type=int, default=256)
-parser.add_argument('--sequence-length', type=int, default=4)
+parser.add_argument('--sequence-length', type=int, default=6)
 args = parser.parse_args()
 
 dataset = Dataset(args)
 model = Model(dataset)
 
 train(dataset, model, args)
-print(predict(dataset, model, text='Knock knock. Whos there?'))
+print(predict(dataset, model, text='1 civ chinese 2 civ franks'))
