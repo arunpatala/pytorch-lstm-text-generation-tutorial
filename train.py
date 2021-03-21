@@ -20,7 +20,7 @@ def train(dataset, model, args):
     for epoch in range(args.max_epochs):
         state_h, state_c = model.init_state(args.sequence_length)
 
-        for batch, (x, y) in enumerate(dataloader):
+        for batch, (x, y) in enumerate(tqdm(dataloader)):
 
             optimizer.zero_grad()
 
