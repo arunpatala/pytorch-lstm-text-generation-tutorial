@@ -18,7 +18,7 @@ def train(dataset, model, args):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     
-    print(predict(dataset, model, text='prompt'))
+    print(predict(dataset, model, text=prompt))
     for epoch in range(args.max_epochs):
         state_h, state_c = model.init_state(args.sequence_length)
 
@@ -36,7 +36,7 @@ def train(dataset, model, args):
             optimizer.step()
 
         print({ 'epoch': epoch, 'batch': batch, 'loss': loss.item() })
-        print(predict(dataset, model, text='prompt'))
+        print(predict(dataset, model, text=prompt))
 
 def predict(dataset, model, text, next_words=100):
     words = text.split(' ')
@@ -65,4 +65,4 @@ dataset = Dataset(args)
 model = Model(dataset)
 
 train(dataset, model, args)
-print(predict(dataset, model, text='prompt'))
+print(predict(dataset, model, text=prompt))
