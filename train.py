@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from model import Model
 from dataset import Dataset
 from tqdm import tqdm 
-
+prompt = 'start civ_magyars building_lumbercamp building_mill research_loom building_lumbercamp'
 def train(dataset, model, args):
     model.train()
 
@@ -18,7 +18,7 @@ def train(dataset, model, args):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     
-    print(predict(dataset, model, text='start civ_franks'))
+    print(predict(dataset, model, text='prompt'))
     for epoch in range(args.max_epochs):
         state_h, state_c = model.init_state(args.sequence_length)
 
@@ -36,7 +36,7 @@ def train(dataset, model, args):
             optimizer.step()
 
         print({ 'epoch': epoch, 'batch': batch, 'loss': loss.item() })
-        print(predict(dataset, model, text='start civ_franks'))
+        print(predict(dataset, model, text='prompt'))
 
 def predict(dataset, model, text, next_words=100):
     words = text.split(' ')
@@ -56,7 +56,7 @@ def predict(dataset, model, text, next_words=100):
     return words
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--max-epochs', type=int, default=10)
+parser.add_argument('--max-epochs', type=int, default=100)
 parser.add_argument('--batch-size', type=int, default=256)
 parser.add_argument('--sequence-length', type=int, default=6)
 args = parser.parse_args()
@@ -65,4 +65,4 @@ dataset = Dataset(args)
 model = Model(dataset)
 
 train(dataset, model, args)
-print(predict(dataset, model, text='start civ_franks'))
+print(predict(dataset, model, text='prompt'))
