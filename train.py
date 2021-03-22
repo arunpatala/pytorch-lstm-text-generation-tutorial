@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from model import Model
 from dataset import Dataset
 from tqdm import tqdm 
-prompt = 'START civ_magyars building_lumbercamp building_mill research_loom building_lumbercamp'
+prompt = 'START civ_franks'
 def train(dataset, model, args):
     model.train()
 
@@ -53,12 +53,12 @@ def predict(dataset, model, text, next_words=200):
         word_index = np.random.choice(len(last_word_logits), p=p)
         words.append(dataset.index_to_word[word_index])
 
-    return words
+    return " ".join(words).split("END")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--max-epochs', type=int, default=100)
 parser.add_argument('--batch-size', type=int, default=256)
-parser.add_argument('--sequence-length', type=int, default=6)
+parser.add_argument('--sequence-length', type=int, default=24)
 args = parser.parse_args()
 
 dataset = Dataset(args)
