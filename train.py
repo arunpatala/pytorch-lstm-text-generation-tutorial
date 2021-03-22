@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from model import Model
 from dataset import Dataset
 from tqdm import tqdm 
-prompt = 'START civ_franks'
+prompt = 'START '
 def train(dataset, model, args):
     model.train()
 
